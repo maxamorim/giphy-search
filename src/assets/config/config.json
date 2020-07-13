@@ -1,0 +1,8 @@
+{
+    "giphy": {
+        "baseUrl": "https://api.giphy.com/v1/",
+        "gifSearchEndpoint": "gifs/search",
+        "rating": "g",
+        "apiKey": "CdRKiCMbTnt9CkZTZ0lGukSczk6iT4Z6"
+    }
+}

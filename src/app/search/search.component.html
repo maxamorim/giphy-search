@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="getGiphyImages()" (keyup.enter)="getGiphyImages()">
+    <mat-form-field class="chip-list">
+        <mat-chip-list #chipList aria-label="Query selection">
+          <mat-chip *ngFor="let word of query.controls; let i = index" [selectable]="selectable"
+                   [removable]="removable" (removed)="removeWordChip(i)">
+            {{word.value}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input id="search-input" class="mat-chip-input mat-input-element" placeholder="New search..."
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="addWordChip($event)" appBadWord>
+          <mat-icon>search</mat-icon>
+        </mat-chip-list>
+      </mat-form-field>
+</form>
+<div id="result-container" [ngClass]="{'display-none': !giphys || giphys?.data.length === 0}">
+    <mat-paginator [ngClass]="{'disabled-pagination': !allGifsLoaded}"
+               [length]="giphys?.pagination.total_count"
+               [pageSize]="giphys?.pagination.count"
+               (page)="getGiphyImages($event)">
+    </mat-paginator>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar-top"></div>
+    </div>
+	<div id="image-container" class="content" fxLayout="row wrap" fxLayoutAlign="center none" fxLayout.xs="column" fxFlexFill>
+		<div fxFlex="33" class="giphy-wrap" *ngFor="let giphy of giphys?.data">
+			<img class="giphy-img" [src]="giphy.images.original.url" [alt]="giphy.title" (load)="onImageLoad(giphys?.data.length)">
+		</div>
+    </div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar-bottom"></div>
+    </div>
+    <mat-paginator [ngClass]="{'disabled-pagination': !allGifsLoaded}"
+               [length]="giphys?.pagination.total_count"
+               [pageSize]="giphys?.pagination.count"
+               (page)="getGiphyImages($event)">
+    </mat-paginator>
+</div>
