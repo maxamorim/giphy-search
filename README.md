@@ -11,6 +11,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [http-server](https://www.npmjs.com/package/http-server) (^0.12.3)
 - [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) (3.8.0)
 
+## First steps
+
+Run `npm install` to install the node_modules folder
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
